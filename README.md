@@ -66,7 +66,7 @@ The design is informed by management-of-AI ideas—especially separating **predi
 
 *Spark* handles volume and join-heavy evaluation prep; *Delta* gives versioned, queryable state for “what did we know when?”; *MLflow* anchors experiment and model lifecycle metadata. The “evaluator” is the **composition** of these pieces plus explicit human-in-the-loop and governance records.
 
-This project does not attempt to “score ethics” or replace governance processes. It focuses on making **evaluation evidence** and **decision-making** traceable and inspectable.
+This project does not attempt to reduce ethics to a single score or replace governance processes. It focuses on making **evaluation evidence** and **decision-making** traceable and inspectable.
 
 ## Tech stack (intended)
 
