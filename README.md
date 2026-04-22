@@ -8,6 +8,24 @@ Most organizations are strong at *shipping* models and weak at *governing* them.
 
 **Responsible AI Evaluator** is a deliberately narrow slice of that problem: a reproducible, auditable pipeline that links **evidence** (evaluations, lineage, human review) to **governance metadata** and **operational context**, framed with MIT Sloan–style ideas on prediction vs decision, augmentation vs automation, and organizational impact.
 
+### Example use case
+
+Consider an AI system used for **hiring screening**.
+
+A traditional pipeline answers:
+
+- model accuracy  
+- inference latency  
+
+This system also records:
+
+- which candidate segments have higher false rejection rates  
+- whether a human reviewer can override decisions  
+- who approved deployment and under what constraints  
+- what happens if error rates drift post-deployment  
+
+The goal is not to eliminate risk, but to make it **visible**, **traceable**, and **governable**.
+
 ## MIT Sloan influence
 
 The design is informed by management-of-AI ideas—especially separating **predictive outputs** from **business or policy decisions**, and treating scale as an **org and workflow** problem, not only a model problem. The codebase does not “implement a framework” wholesale; it **maps** key concepts to tables, runs, and workflow hooks so the philosophy is **traceable in the system**, not just in prose.
@@ -48,6 +66,8 @@ The design is informed by management-of-AI ideas—especially separating **predi
 
 *Spark* handles volume and join-heavy evaluation prep; *Delta* gives versioned, queryable state for “what did we know when?”; *MLflow* anchors experiment and model lifecycle metadata. The “evaluator” is the **composition** of these pieces plus explicit human-in-the-loop and governance records.
 
+This project does not attempt to “score ethics” or replace governance processes. It focuses on making **evaluation evidence** and **decision-making** traceable and inspectable.
+
 ## Tech stack (intended)
 
 | Area | Technology | Role in this project |
@@ -69,7 +89,10 @@ The design is informed by management-of-AI ideas—especially separating **predi
 │   ├── 00-project-charter.md
 │   ├── 01-problem-statement.md
 │   ├── 02-mit-sloan-framework-mapping.md
+│   ├── 04-data-model.md
 │   └── ...                     # design notes, ADRs, runbooks
+├── data/
+│   └── sample_ai_use_cases.csv  # starter reference data
 ├── src/                        # pipeline jobs, evaluators, packaging (as implemented)
 ├── notebooks/                  # exploration, demos (optional)
 ├── tests/
@@ -96,7 +119,14 @@ Not every phase need ship as a monolith; the roadmap is the intended evolution o
 - **Product judgment**: a narrow problem, explicit non-goals, and artifacts hiring managers can skim  
 - **Communication**: design docs and README written like internal technical proposals  
 
-If you are evaluating this repo: start with `docs/00-project-charter.md` and `docs/01-problem-statement.md`, then `docs/02-mit-sloan-framework-mapping.md`.
+## How to read this repo
+
+1. Start with `docs/00-project-charter.md` for scope and principles  
+2. Read `docs/01-problem-statement.md` for the problem framing  
+3. Review `docs/02-mit-sloan-framework-mapping.md` for how concepts map to system design  
+4. Continue to `docs/04-data-model.md` for the concrete system structure  
+
+This mirrors how internal engineering proposals are typically reviewed.
 
 ## License
 

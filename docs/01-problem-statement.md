@@ -4,7 +4,7 @@
 
 Many companies run mature **delivery** practices for software and increasingly for ML: CI/CD, registries, canaries, and dashboards. They are weaker at **evaluating** AI initiatives as **initiatives**—embedded in products, org incentives, and external effects.
 
-The usual build pipeline answers **“can we build it?”** (quality on a test set, latency, cost). The harder questions are **“should we build or deploy it?”** and **“for whom, under what constraints, and with what recourse if it is wrong?”** Those questions cut across data fit, product risk, **governance**, **human oversight**, and **societal impact**. When they are unowned or answered only in static documents, you get a persistent gap: **the system in production** does not match **the story** told at launch.
+The usual build pipeline answers **“can we build it?”** (quality on a test set, latency, cost). The harder questions are **“should we build or deploy it?”** and **“for whom, under what constraints, and with what recourse if it is wrong?”** Those questions cut across data fit, product risk, **governance**, **human oversight**, and **societal impact**—and are **rarely owned in one place**. When they are unowned or answered only in static documents, you get a persistent gap: **the system in production** does not match **the story** told at launch.
 
 ## “Can we build it?” vs “Should we build it?”
 

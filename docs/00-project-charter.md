@@ -2,7 +2,7 @@
 
 ## Purpose
 
-**Responsible AI Evaluator** is a portfolio system that models how an engineering org can connect **model evaluation evidence**, **lifecycle metadata**, and **governance records** in one auditable path. The purpose is to make “responsible AI” **operational**—something you can query, version, and review—while staying narrow enough to implement well.
+**Responsible AI Evaluator** is a portfolio system that models how an engineering org can connect **model evaluation evidence**, **lifecycle metadata**, and **governance records** into a single auditable path. The purpose is to make “responsible AI” **operational**—something you can query, version, and review—while staying narrow enough to implement well.
 
 ## Motivation
 
