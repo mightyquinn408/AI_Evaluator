@@ -1,0 +1,11 @@
+use_case_id,use_case_name,domain,use_case_type,automation_level,human_in_loop,data_sensitivity,affected_population,deployment_context,geography_scope,societal_impact_level,known_risk_flags
+UC-HR-001,Resume screening ranker (enterprise hiring),Hiring,screening,semi_automated,override,high,job applicants,ATS integration,global,high,bias risk;appeal required
+UC-HR-002,Candidate shortlist for engineering roles (internal),Hiring,shortlisting,advisory,review,high,internal employees,internal tools,North America,medium,bias risk;low transparency;high consequence error
+UC-HC-010,Triage note classifier (ED routing),Healthcare,triage,semi_automated,override,high,emergency patients,hospital EHR,United States,high,safety risk;disparate error by segment;audit required
+UC-ED-020,At-risk student early alert,Education,intervention ranking,advisory,review,high,K-12 students,school SIS,state_regional,high,feedback loop;stigma risk;parent appeal required
+UC-FS-030,First-party transaction fraud score,Financial Services,fraud detection,automated,none,high,card and bank customers,online auth,EEA+UK,high,false positive cost;regulatory inquiry risk
+UC-CS-040,Support ticket intent and priority,Customer Support,routing,semi_automated,review,medium,all customers,contact center,global,medium,offshore data transfer;low transparency;metric gaming risk
+UC-PS-050,Permit application document completeness check,Public Sector,eligibility precheck,advisory,override,high,residents and businesses,government portal,state,medium,access equity;appeal required;language coverage gap
+UC-ENT-060,IT access request risk scoring,Internal enterprise tools,access governance,automated,none,high,employees,IdP/ITSM,global,low-medium,bias risk;revocation timeliness;high consequence error
+UC-ED-021,Plagiarism likelihood flag (higher ed),Education,academic integrity,advisory,review,medium,university students,LMS,United States,medium,false positive;due process;appeal required
+UC-HC-011,Clinician documentation coding assist,Healthcare,coding support,advisory,review,very_high,patients and providers,EHR,United States,medium,privacy risk;provider burden;compliance with coding policy
