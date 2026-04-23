@@ -45,17 +45,9 @@ flowchart TD
         C[MLflow<br/>Runs & Model Registry]
     end
 
-    subgraph Evaluation
-        D[Evaluation Signals<br/>Metrics & Segments]
-    end
-
-    subgraph Governance
-        E[Decision Records<br/>Approval & Scope]
-    end
-
-    subgraph Ops Loop
-        F[Audit & Feedback Loop<br/>Drift, Incidents, Re-eval]
-    end
+    D[Evaluation<br/>Signals, Metrics & Segments]
+    E[Governance<br/>Decision Records, Approval & Scope]
+    F[Ops Loop<br/>Audit & Feedback, Drift, Incidents, Re-eval]
 
     A --> B
     C --> B
