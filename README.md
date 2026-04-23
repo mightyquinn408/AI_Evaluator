@@ -29,39 +29,39 @@ The goal is not to eliminate risk, but to make it **visible**, **traceable**, an
 ## MIT Sloan influence
 
 The design is informed by management-of-AI ideas—especially separating **predictive outputs** from **business or policy decisions**, and treating scale as an **org and workflow** problem, not only a model problem. The codebase does not “implement a framework” wholesale; it **maps** key concepts to tables, runs, and workflow hooks so the philosophy is **traceable in the system**, not just in prose.
+This project is informed in part by the MIT Sloan executive program [Making AI Work: Machine Intelligence for Business and Society](https://executive.mit.edu/course/making-ai-work--machine-intelligence-for-business-and-society/a054v00000jjjNNAAY.html).
 
 ## High-level architecture
 
-```text
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         Responsible AI Evaluator                            │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│   Data & lineage layer          Model lifecycle & eval artifacts             │
-│   ┌──────────────┐              ┌──────────────┐                          │
-│   │ Apache Spark │─── bronze/ ──▶│   Delta      │◀── MLflow (runs,       │
-│   │  (ingest /   │    silver/    │   Lake       │     params, metrics,    │
-│   │  transform)  │    gold       │  (ACID,      │     model registry)      │
-│   └──────────────┘              │   time-travel)│                          │
-│         │                        └──────┬───────┘                          │
-│         │                               │                                  │
-│         └───────────────┬───────────────┘                                  │
-│                         ▼                                                    │
-│              Evaluation & policy signals (tabular “facts”)                 │
-│                         │                                                    │
-│                         ▼                                                    │
-│         ┌───────────────────────────────────┐                              │
-│         │  Decision & governance surface    │                              │
-│         │  (who approved, when, scope,        │                              │
-│         │  augmentation vs automation,         │                              │
-│         │  known failure modes, rollback)   │                              │
-│         └───────────────────────────────────┘                              │
-│                         │                                                    │
-│                         ▼                                                    │
-│              Audit trail + operational feedback loop                       │
-│              (reliability, incidents, re-eval triggers)                    │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+
+    subgraph Data Layer
+        A[Apache Spark<br/>Ingestion & Transform]
+        B[Delta Lake<br/>Versioned Tables]
+    end
+
+    subgraph ML Lifecycle
+        C[MLflow<br/>Runs & Model Registry]
+    end
+
+    subgraph Evaluation
+        D[Evaluation Signals<br/>Metrics & Segments]
+    end
+
+    subgraph Governance
+        E[Decision Records<br/>Approval & Scope]
+    end
+
+    subgraph Ops Loop
+        F[Audit & Feedback Loop<br/>Drift, Incidents, Re-eval]
+    end
+
+    A --> B
+    C --> B
+    B --> D
+    D --> E
+    E --> F
 ```
 
 *Spark* handles volume and join-heavy evaluation prep; *Delta* gives versioned, queryable state for “what did we know when?”; *MLflow* anchors experiment and model lifecycle metadata. The “evaluator” is the **composition** of these pieces plus explicit human-in-the-loop and governance records.
@@ -99,6 +99,30 @@ This project does not attempt to reduce ethics to a single score or replace gove
 └── infra/ or .github/         # CI, IaC samples (as implemented)
 ```
 
+## Project documentation
+
+- [Project Charter](docs/00-project-charter.md)  
+  Scope, non-goals, and guiding principles for the system  
+
+- [Problem Statement](docs/01-problem-statement.md)  
+  Why traditional ML pipelines fail to address governance, oversight, and impact  
+
+- [MIT Sloan Framework Mapping](docs/02-mit-sloan-framework-mapping.md)  
+  Translation of responsible AI concepts into concrete system design decisions  
+
+- [Data Model](docs/04-data-model.md)  
+  Core entities, relationships, and auditability design  
+
+- [Scoring Logic](docs/05-scoring-logic.md)  
+  Deterministic rules and signals for risk, readiness, and required controls  
+
+Supporting data:
+
+- [Sample AI Use Cases Dataset](data/sample_ai_use_cases.csv)  
+  Example dataset used to model real-world AI evaluation scenarios
+
+If you're short on time, start with the Project Charter and Data Model for a quick understanding of the system design.
+
 ## Roadmap (phased, realistic)
 
 | Phase | Focus | Outcome |
@@ -125,6 +149,7 @@ Not every phase need ship as a monolith; the roadmap is the intended evolution o
 2. Read `docs/01-problem-statement.md` for the problem framing  
 3. Review `docs/02-mit-sloan-framework-mapping.md` for how concepts map to system design  
 4. Continue to `docs/04-data-model.md` for the concrete system structure  
+5. Finish with `docs/05-scoring-logic.md` for the first-pass evaluation and control layer  
 
 This mirrors how internal engineering proposals are typically reviewed.
 
